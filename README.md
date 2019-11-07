@@ -1,29 +1,32 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This is LAB 04-a Collision StarterKit. This is a simple library that demonstrates the use of pythagoras theorem to see if two points overlap. From this we can apply it to other applications and other objects to check for collisions. 
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Lab 04-a Experiment with collisions.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Clone repository
 
-### Contribution guidelines ###
+### Cloning Repository ###
+* Run Git Bash and type the Follow commands into GitBash
 
-* Writing tests
-* Code review
-* Other guidelines
+* Check Present Working Directory `pwd`
+
+* Change to the C drive or other drive `cd c:`
+
+* Make a projects Directory `mkdir projects`
+
+* Change to the projects directory by `cd projects`
+
+* Clone the project `git clone git clone https://MuddyGames@bitbucket.org/MuddyGames/gameplay-programming-i-lab-04-a.git`
+
+* Change to the project directory `cd projects gameplay-programming-i-lab-04-a.git`
+
+* List files that were downloaded `ls`
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* philip.bourke@itcarlow.ie
