@@ -21,7 +21,7 @@ This is LAB 04-a Collision StarterKit. This is a simple library that demonstrate
 
 * Change to the projects directory by `cd projects`
 
-* Clone the project `git clone git clone https://MuddyGames@bitbucket.org/MuddyGames/gameplay-programming-i-lab-04-a.git`
+* Clone the project `git clone https://MuddyGames@bitbucket.org/MuddyGames/gameplay-programming-i-lab-04-a.git`
 
 * Change to the project directory `cd projects gameplay-programming-i-lab-04-a.git`
 
