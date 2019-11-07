@@ -17,6 +17,10 @@ int collision(Point a, Point b) {
 	int x_Distance = b.x - a.x;
 	int y_Distance = b.y - a.y;
 
+	// Now that we have the distance (Length)
+	// between point a and b
+	// Use Pythagoras theorem to get the distance between
+	// the Point a and Point b 
 	result = sqrt(pow(x_Distance, 2) + pow(y_Distance, 2));
 
 	return result == 0 ? true : false;
@@ -52,6 +56,8 @@ int main() {
 		else
 		{
 			std::cout << "No Collision" << std::endl;
+			one.print();
+			two.print();
 		}
 
 		player_x_coordinate = rand() % 10 + 1;
