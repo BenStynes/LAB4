@@ -12,7 +12,17 @@ public:
 	}
 };
 
-int collision(Point a, Point b) {
+class Circle {
+public:
+	Point p;
+	int r;
+
+	void print() {
+		std::cout << "x:" << p.x << " y:" << p.y << " r:" << p.r << std::endl;
+	}
+};
+
+int distance(Point a, Point b) {
 	int result = 0;
 	int x_Distance = b.x - a.x;
 	int y_Distance = b.y - a.y;
@@ -23,7 +33,7 @@ int collision(Point a, Point b) {
 	// the Point a and Point b 
 	result = sqrt(pow(x_Distance, 2) + pow(y_Distance, 2));
 
-	return result == 0 ? true : false;
+	return result;
 }
 
 
@@ -46,16 +56,16 @@ int main() {
 	two.y = npc_y_coordinate;
 
 	while (true) {
-		if (collision(one, two))
+		if (distance(one, two) == 0)
 		{
-			std::cout << "Collision" << std::endl;
+			std::cout << "Collision Point" << std::endl;
 			one.print();
 			two.print();
 			std::cin.get();
 		}
 		else
 		{
-			std::cout << "No Collision" << std::endl;
+			std::cout << "No Collision Point" << std::endl;
 			one.print();
 			two.print();
 		}
