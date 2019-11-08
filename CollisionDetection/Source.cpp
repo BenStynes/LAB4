@@ -22,7 +22,7 @@ public:
 	}
 };
 
-int distance(Point a, Point b) {
+int calculate_hypotenuse(Point a, Point b) {
 	int result = 0;
 
 	// Find the distance (Length) of X and Y  
@@ -68,7 +68,7 @@ int main() {
 	while (true) {
 
 		// Point Collision check
-		if (distance(player_point, npc_point) == 0)
+		if (calculate_hypotenuse(player_point, npc_point) == 0)
 		{
 			std::cout << "Point Collision" << std::endl;
 			player_point.print();
@@ -86,7 +86,7 @@ int main() {
 		player_point.y = rand() % 10 + 1;
 
 		// Circle Collision check
-		if (distance(player_circle.p, npc_circle.p) < (player_circle.r + npc_circle.r))
+		if (calculate_hypotenuse(player_circle.p, npc_circle.p) < (player_circle.r + npc_circle.r))
 		{
 			std::cout << "Circle Collision" << std::endl;
 			player_circle.print();
