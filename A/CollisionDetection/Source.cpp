@@ -150,11 +150,8 @@ int main() {
 			player_circle.print();
 			npc_point.print();
 		}
-		// Circle Collision check
-		/*if (player_box.p.x < npc_box.p.x + npc_box.w &&
-			player_box.p.x + player_box.w > npc_box.p.x &&
-			player_box.p.y < npc_box.p.y + npc_box.h &&
-			player_box.p.y + player_box.h > npc_box.p.y)*/
+		//bix to box
+		
 			
 			if (player_box.p.x + player_box.w >= npc_box.p.x &&    // r1 right edge past r2 left
 				player_box.p.x <=npc_box.p.x + npc_box.w &&    // r1 left edge past r2 right
