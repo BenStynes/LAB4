@@ -15,7 +15,7 @@ int main()
 {
 	// Create the main window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-
+	bool drawColision = false;
 	// Load a NPC's sprites to display
 	sf::Texture npc_texture;
 	if (!npc_texture.loadFromFile("assets\\grid.png")) {
@@ -62,13 +62,22 @@ int main()
 		npc.getAnimatedSprite().getGlobalBounds().width, 
 		npc.getAnimatedSprite().getPosition().y +
 		npc.getAnimatedSprite().getGlobalBounds().height);
+	sf::RectangleShape npc_box;
+
+	npc_box.setOutlineThickness(2);
+	npc_box.setOutlineColor(sf::Color::Green);
+	npc_box.setSize(sf::Vector2f{ 84,84 });
+	npc_box.setFillColor(sf::Color{ 0,0,0,0 });
 
 	//Setup Player AABB
 	c2AABB aabb_player;
 	aabb_player.min = c2V(player.getAnimatedSprite().getPosition().x, player.getAnimatedSprite().getPosition().y);
 	aabb_player.max = c2V(player.getAnimatedSprite().getGlobalBounds().width / 6, player.getAnimatedSprite().getGlobalBounds().width / 6);
-
-
+	sf::RectangleShape player_box;
+	player_box.setOutlineThickness(2);
+	player_box.setOutlineColor(sf::Color::Green);
+	player_box.setSize(sf::Vector2f{ 84,84 });
+	player_box.setFillColor(sf::Color{ 0,0,0,0 });
 	// Initialize Input
 	Input input;
 
@@ -83,10 +92,10 @@ int main()
 	{
 		// Move Sprite Follow Mouse
 		player.getAnimatedSprite().setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-		
+		player_box.setPosition(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		// Move The NPC
 		sf::Vector2f move_to(npc.getAnimatedSprite().getPosition().x + direction.x, npc.getAnimatedSprite().getPosition().y + direction.y);
-
+		npc_box.setPosition(npc.getAnimatedSprite().getPosition());
 		if (move_to.x < 0) {
 			direction.x *= -1;
 			move_to.x = 0 + npc.getAnimatedSprite().getGlobalBounds().width;
@@ -142,6 +151,7 @@ int main()
 				window.close();
 				break;
 			case sf::Event::KeyPressed:
+
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 				{
 					input.setCurrent(Input::Action::LEFT);
@@ -154,13 +164,26 @@ int main()
 				{
 					input.setCurrent(Input::Action::UP);
 				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
+				{
+					if (drawColision == true)
+					{
+						drawColision = false;
+
+					}
+					else
+					{
+						drawColision = true;
+					}
+				}
+				
 				break;
 			default:
 				input.setCurrent(Input::Action::IDLE);
 				break;
 			}
 		}
-
+	
 		// Handle input to Player
 		player.handleInput(input);
 
@@ -174,21 +197,32 @@ int main()
 		result = c2AABBtoAABB(aabb_player, aabb_npc);
 		cout << ((result != 0) ? ("Collision") : "") << endl;
 		if (result){
-			player.getAnimatedSprite().setColor(sf::Color(255,0,0));
+			player.getAnimatedSprite().setColor(sf::Color(255,255,255));
+			npc_box.setOutlineColor(sf::Color::Green);
+			player_box.setOutlineColor(sf::Color::Green);
 		}
 		else {
-			player.getAnimatedSprite().setColor(sf::Color(0, 255, 0));
+			player.getAnimatedSprite().setColor(sf::Color(100, 100, 100));
+			player_box.setOutlineColor(sf::Color::White);
+			npc_box.setOutlineColor(sf::Color::White);
 		}
 
 		// Clear screen
 		window.clear();
 
-		// Draw the Players Current Animated Sprite
-		window.draw(player.getAnimatedSprite());
+		if (drawColision == true)
+		{
+			window.draw(npc_box);
+			window.draw(player_box);
+		}
+		else
+		{
+			// Draw the Players Current Animated Sprite
+			window.draw(player.getAnimatedSprite());
 
-		// Draw the NPC's Current Animated Sprite
-		window.draw(npc.getAnimatedSprite());
-
+			// Draw the NPC's Current Animated Sprite
+			window.draw(npc.getAnimatedSprite());
+		}
 		// Update the window
 		window.display();
 	}
