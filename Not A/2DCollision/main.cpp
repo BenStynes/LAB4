@@ -29,7 +29,7 @@ int main()
 		DEBUG_MSG("Failed to load file");
 		return EXIT_FAILURE;
 	}
-
+	float yoMamma = 89;
 	// Setup NPC's Default Animated Sprite
 	AnimatedSprite npc_animated_sprite(npc_texture);
 	npc_animated_sprite.addFrame(sf::IntRect(3, 3, 84, 84));
@@ -63,7 +63,9 @@ int main()
 		npc.getAnimatedSprite().getPosition().y +
 		npc.getAnimatedSprite().getGlobalBounds().height);
 	sf::RectangleShape npc_box;
-
+	c2Circle player_circle;
+	sf::CircleShape playerCircle;
+	player_circle.r = yoMamma;
 	npc_box.setOutlineThickness(2);
 	npc_box.setOutlineColor(sf::Color::Green);
 	npc_box.setSize(sf::Vector2f{ 84,84 });
@@ -106,14 +108,16 @@ int main()
 	capsule_npc.r = 30;
 
 	//ray setup;
+	sf::Vector2f dv{ sf::Vector2f{ 420,300 } - sf::Vector2f{ 100,300 }};
+	float magnitude{ sqrt(dv.x * dv.x + dv.y * dv.y) };
 	sf::VertexArray pointless2{ sf::Lines ,2 };
 	pointless2.append({ sf::Vector2f{ 100,300 },sf::Color::White });
 	pointless2.append({ sf::Vector2f{ 420,300 },sf::Color::White });
-
+	sf::Vector2f unit{ dv / magnitude };
 	c2Ray raymond;
 	raymond.p = c2v{ 100,300 };
-	raymond.d = { c2Norm(c2v{100,300}) };
-	raymond.t = {  };
+	raymond.d = { unit.x,unit.y};
+	raymond.t = {  magnitude };
 
 	c2Raycast re;
 	//Setup Player AABB
